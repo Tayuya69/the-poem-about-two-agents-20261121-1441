@@ -25,6 +25,10 @@ def main() -> None:
     chars = len(POEM)
     if not POEM.strip():
         raise ValueError("poem is blank")
+    if "\n" not in POEM:
+        raise ValueError("poem has no line breaks")
+    if any(ord(ch) < 32 and ch != "\n" for ch in POEM):
+        raise ValueError("poem contains control characters")
     if not (MIN_CHARS <= chars <= MAX_CHARS):
         raise ValueError(
             f"poem is {chars} characters, must be {MIN_CHARS}-{MAX_CHARS}"
